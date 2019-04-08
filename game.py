@@ -1,5 +1,6 @@
 import pyglet
 from player import Player
+from floor import Floor
 
 class Game(pyglet.window.Window):
 
@@ -7,16 +8,18 @@ class Game(pyglet.window.Window):
         super(Game, self).__init__(width=width, height=height)
         pyglet.clock.schedule_interval(self.update, 1 / 120.0)
 
-        self.label = pyglet.text.Label('This is a label!', x=10, y=10)
-
         self.player = Player(50, 50)
+        self.floor = Floor(0, 10)
 
         self.push_handlers(self.player.key_handler)
 
+        self.game_objects = [self.player, self.floor]
+
     def on_draw(self):
         self.clear()
-        self.label.draw()
-        self.player.draw()
+        for obj in self.game_objects:
+            obj.draw()
 
     def update(self, dt):
-        self.player.update(dt)
+        for obj in self.game_objects:
+            obj.update(dt)
