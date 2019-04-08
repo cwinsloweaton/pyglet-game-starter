@@ -13,15 +13,12 @@ class Player():
 
         self.key_handler = key.KeyStateHandler()
 
-        self.walk_animation = pyglet.image.Animation.from_image_sequence(self.spritesheet_grid[6:8], 0.15)
 
     def update(self, dt):
         if self.key_handler[key.LEFT]:
             self.sprite.x -= 100 * dt
-            self.sprite.image = self.walk_animation
         if self.key_handler[key.RIGHT]:
             self.sprite.x += 100 * dt
-            self.sprite.image = self.walk_animation
         self.sprite.update()
     
     def draw(self):
