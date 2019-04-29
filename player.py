@@ -1,5 +1,6 @@
 import pyglet
 from pyglet.window import key
+from projectile import Projectile
 from physicalobject import PhysicalObject
 
 class Player(PhysicalObject):
@@ -15,8 +16,13 @@ class Player(PhysicalObject):
         self.move_force = 50
         self.grounded = False
 
-    def on_draw(self):
-        super().on_draw()
+        self.projectiles = []
+
+
+    def draw(self):
+        super().draw()
+        for projectile in self.projectiles:
+            projectile.draw()
 
     def update(self, dt):
         
@@ -25,6 +31,19 @@ class Player(PhysicalObject):
             self.velocity_x = -self.move_force
         if self.key_handler[key.RIGHT]:
             self.velocity_x = self.move_force
+        if self.key_handler[key.SPACE]:
+            self.jump(100)
+        if self.key_handler[key.F]:
+           self.fire()
         super().update(dt)
 
         self.velocity_x = 0
+
+        for projectile in self.projectiles:
+            projectile.update(dt)
+
+    def jump(self, power):
+        self.velocity_y = power
+    
+    def fire(self):
+        self.projectiles.append(Projectile(self.x, self.y, 100, 0))

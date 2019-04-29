@@ -10,7 +10,8 @@ class PhysicalObject(pyglet.sprite.Sprite):
 
     def update(self, dt):
         # gravity
-        self.velocity_y += -9.8 * dt
+        self.velocity_y += - 80 * dt
+        
         self.x += self.velocity_x * dt
         self.y += self.velocity_y * dt
 
@@ -19,6 +20,6 @@ class PhysicalObject(pyglet.sprite.Sprite):
             and self.x + other.width > other.x
             and self.y < other.y + other.height
             and self.y + self.height > other.y):
-            print("collision")
+            #print("collision")
             return True
         return False

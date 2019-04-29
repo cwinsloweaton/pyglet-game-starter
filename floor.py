@@ -6,6 +6,9 @@ class Floor(pyglet.sprite.Sprite):
         super(Floor, self).__init__(img=pyglet.resource.image("_white.png"), x=x, y=y)
         self.scale_x = 10
         
+"https://github.com/cwinsloweaton/pyglet-game-starter"
+
+
 
 """ if(player1.x < player2.x + player2.width &&
     player1.x + player1.width > player2.x &&
