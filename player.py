@@ -12,7 +12,6 @@ class Player(PhysicalObject):
         super().__init__(img=self.spritesheet_grid[4], x=x, y=y)
 
         self.key_handler = key.KeyStateHandler()
-
         self.move_force = 50
         self.grounded = False
 
@@ -25,14 +24,16 @@ class Player(PhysicalObject):
             projectile.draw()
 
     def update(self, dt):
-        
-
+        if self.key_handler[key.RSHIFT]:
+            self.velocity_y -= self.move_force
         if self.key_handler[key.LEFT]:
             self.velocity_x = -self.move_force
         if self.key_handler[key.RIGHT]:
             self.velocity_x = self.move_force
         if self.key_handler[key.SPACE]:
-            self.jump(100)
+            if self.grounded:
+                self.jump(100)
+                self.grounded = False
         if self.key_handler[key.F]:
            self.fire()
         super().update(dt)
@@ -47,3 +48,8 @@ class Player(PhysicalObject):
     
     def fire(self):
         self.projectiles.append(Projectile(self.x, self.y, 100, 0))
+
+    def check_collision(self, other):
+        if super().check_collision(other):
+            self.grounded = True
+        return super().check_collision(other)
