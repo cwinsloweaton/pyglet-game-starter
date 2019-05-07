@@ -30,7 +30,5 @@ class Game(pyglet.window.Window):
                 if other_obj == obj or not isinstance(obj, PhysicalObject):
                     continue
                     
-                if obj.check_collision(other_obj):
-                    obj.y = other_obj.y + other_obj.height
-                    obj.velocity_y = 0
+                obj.check_collision(other_obj)
             obj.update(dt)

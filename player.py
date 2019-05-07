@@ -2,6 +2,7 @@ import pyglet
 from pyglet.window import key
 from projectile import Projectile
 from physicalobject import PhysicalObject
+from floor import Floor
 
 class Player(PhysicalObject):
 
@@ -50,6 +51,5 @@ class Player(PhysicalObject):
         self.projectiles.append(Projectile(self.x, self.y, 100, 0))
 
     def check_collision(self, other):
-        if super().check_collision(other):
+        if isinstance(super().check_collision(other), Floor):
             self.grounded = True
-        return super().check_collision(other)
