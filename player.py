@@ -33,7 +33,7 @@ class Player(PhysicalObject):
             self.velocity_x = self.move_force
         if self.key_handler[key.SPACE]:
             if self.grounded:
-                self.jump(100)
+                self.jump(200)
                 self.grounded = False
         if self.key_handler[key.F]:
            self.fire()
